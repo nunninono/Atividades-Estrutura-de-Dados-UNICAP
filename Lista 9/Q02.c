@@ -69,7 +69,7 @@ void inserirValor (LDE* lista, int valor) {
     printf("Valor inserido!!\n\n");
 }
 
-void listar (LDE lista) {
+void listarCrescente (LDE lista) {
     if (isEmpty(lista) == 1) {
         printf("Lista vazia!!");
         return;
@@ -108,7 +108,7 @@ int main () {
                 break;
                 
             case 2:
-                listar(lista1);
+                listarCrescente(lista1);
                 break;
                 
             case 3:
