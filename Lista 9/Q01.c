@@ -103,17 +103,29 @@ void remover (LDE* lista, int valor) {
 
     ListNode* achado = buscaSequencialMelhorada(*lista, valor);
 
-    for (ListNode* aux = lista->inicio; aux != NULL; aux = aux->prox) {
-        if (achado->info == valor) {
-            aux->ant->prox = aux->prox;
-            aux->prox->ant = aux->ant;
-            free(aux);
-            lista->qtd--;
-            printf("Valor removido da lista!!\n\n");
-            return;
-        }
+    if (achado == NULL) {   // Nao achado
+        printf("Valor nao encontrado na lista.\n\n");
+        return;
     }
-    printf("Valor nao encontrado na lista.\n\n");
+    else if (lista->inicio == achado && lista->fim == achado) {   // Unico
+        lista->inicio = NULL;
+        lista->fim = NULL;
+    }
+    else if (lista->inicio == achado) {  // Inicio
+        lista->inicio = achado->prox;
+        lista->inicio->ant = NULL;
+    }
+    else if (lista->fim == achado) {   // Fim
+        lista->fim = achado->ant;
+        lista->fim->prox = NULL;
+    }
+    else {   // Meio
+        achado->ant->prox = achado->prox;
+        achado->prox->ant = achado->ant;
+    }
+    free(achado);
+    lista->qtd--;
+    printf("Valor removido da lista!!\n\n");
 }
 
 int main () {
