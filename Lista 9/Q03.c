@@ -87,7 +87,14 @@ void inserirTarefa (LDE* lista, int valor, char* descricao) {
 }
 
 void buscaDescricao (LDE lista, char* descricao) {
-    
+    int count = 0;
+    for (ListNode* aux = lista.inicio; aux != NULL; aux = aux->prox) {
+        if (strcmp(aux->descricao, descricao) == 0) {
+            printf("Existem um total de %d tarefas a serem executadas antes da tarefa requerida.\n", count);
+        }
+        count++;
+    }
+    printf("A tarefa com a descricao digitada nao existe!!\n");
 }
 
 
