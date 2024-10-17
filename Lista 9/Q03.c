@@ -97,5 +97,24 @@ void buscaDescricao (LDE lista, char* descricao) {
     printf("A tarefa com a descricao digitada nao existe!!\n");
 }
 
+ListNode* executarTarefa (LDE* lista) {  // NÃO SEI COMO DAR O FREE(AUX) DEPOIS (pq tem return antes)
+    if (isEmpty(*lista) == 1) {
+        printf("A lista esta vazia!!\n");
+        return NULL;
+    }
+    else if (lista->fim == lista->inicio) {
+        ListNode* aux = lista->inicio;
+        lista->inicio = NULL;
+        lista->fim = NULL;
+        return aux;
+    }
+    else {
+        ListNode* aux = lista->inicio;
+        lista->inicio = lista->inicio->prox;
+        lista->inicio->ant = NULL;
+        return aux;
+    }
+}
+
 
 
