@@ -163,3 +163,13 @@ void exibirDescricoes (LDE lista, char* descricao, int valor) {
     }
     printf("Nenhuma tarefa encontrada nessa prioridade!!\n");
 }
+
+void listarTarefas (LDE lista) {
+    if (isEmpty(lista) == 1) {
+        printf("Lista vazia!!\n");
+    }
+    for (ListNode* aux = lista.inicio; aux != NULL; aux = aux->prox) {
+        printf("prioridade(%d): %s\n", aux->prioridade, aux->descricao);
+    }
+    printf("\n");
+}
