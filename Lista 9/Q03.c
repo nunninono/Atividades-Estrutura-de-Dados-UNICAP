@@ -233,13 +233,15 @@ int main() {
                     break;
                 }
                 printf("Insira uma descricao para a tarefa: ");
-                scanf("%s", texto);
+                getchar();
+                fgets(texto, sizeof(texto), stdin);     
                 inserirTarefa(&lista1, num, texto);
                 break;
             
             case 2:
                 printf("Insira a descricao a ser buscada: ");
-                scanf("%s", texto);
+                getchar();
+                fgets(texto, sizeof(texto), stdin);   
                 buscaDescricao(lista1, texto);
                 break;
 
@@ -249,12 +251,13 @@ int main() {
                     printf("A lista esta vazia!!\n");
                     break;
                 }
-                printf ("A tarefa de prioridade %d e descricao ""%d"" foi executada!\n", tarefa->prioridade, tarefa->descricao);
+                printf ("A tarefa de prioridade %d e descricao ""%s"" foi executada!\n", tarefa->prioridade, tarefa->descricao);
                 break;
             
             case 4:
                 printf("Insira a descricao da tarefa a ser cancelada: ");
-                scanf("%s", texto);
+                getchar();
+                fgets(texto, sizeof(texto), stdin);    
                 cancelarTarefa(&lista1, texto);
                 break;
             
@@ -270,7 +273,8 @@ int main() {
 
             case 7:
                 printf("Insira a descricao da tarefa: ");
-                scanf("%s", texto);              
+                getchar();
+                fgets(texto, sizeof(texto), stdin);          
                 printf("Insira a prioridade da tarefa: ");
                 scanf("%d", &num);
                 mudarPrioridade(&lista1, texto, num);
