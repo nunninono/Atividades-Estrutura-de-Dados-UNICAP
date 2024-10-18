@@ -147,4 +147,19 @@ void cancelarTarefa (LDE* lista, char* descricao) {
     printf("Descricao nao bate com as descricoes cadastradas!!\n");
 }
 
-
+void exibirDescricoes (LDE lista, char* descricao, int valor) {
+    if (isEmpty(lista) == 1) {
+        printf("A lista esta vazia!!\n");
+        return;
+    }
+    printf("Descricao das tarefas da prioridade %d:\n\n", valor);
+    for (ListNode* aux = lista.inicio; aux != NULL; aux = aux->prox) {
+        if (aux->prioridade == valor) {
+            printf("- %s\n", aux->descricao);
+        }
+        else if (aux->prioridade < valor) {
+            break;
+        }
+    }
+    printf("Nenhuma tarefa encontrada nessa prioridade!!\n");
+}
