@@ -92,6 +92,10 @@ void inserirTarefa (LDE* lista, int prioridade, char* descricao) {
                 lista->fim = novoNo;
             }
             else {
+                LDENode* aux = lista->inicio;
+                while (aux->info->prioridade < novoNo->info->prioridade) {
+                    aux = aux->prox;
+                }
                 
             }
         }
