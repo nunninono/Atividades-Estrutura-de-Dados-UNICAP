@@ -55,7 +55,12 @@ int buscaSimples(LDE lista, char* descricao) {
         return 0;
     }
     else {
-        for (List)
+        for (LDENode* aux = lista->inicio; aux != NULL; aux = aux->prox) {
+            if (strcmp(aux->info->descricao, descricao) == 0) {
+                return 1;
+            }
+        }
+        return 0;
     }
 }
 
