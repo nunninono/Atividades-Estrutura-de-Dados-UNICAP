@@ -1,3 +1,5 @@
+// CODIGO NAO ESTA TOTALMENTE MODULARIZADO (falta dunção buscar)
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -172,4 +174,31 @@ void listarTarefas (LDE lista) {
         printf("prioridade(%d): %s\n", aux->prioridade, aux->descricao);
     }
     printf("\n");
+}
+
+void mudarPrioridade (LDE* lista, char* descricao, int novaPrioridade) {
+    if (isEmpty(*lista) == 1) {
+        printf("Lista vazia!!\n");
+    }
+    cancelarTarefa(lista, descricao);
+    inserirTarefa(lista, novaPrioridade, descricao);
+    /*for (ListNode* aux = lista->inicio; aux != NULL; aux = aux->prox) {
+        if (strcmp(aux->descricao, descricao) == 0) {
+            if (lista->inicio == lista->fim) {
+                free(aux);
+                lista->inicio = NULL;
+                lista->fim = NULL;
+                inserirTarefa(&lista, novaPrioridade, &descricao);
+            }
+            else if (aux == lista->fim) {
+                lista->fim = lista->fim->ant;
+                free(lista->fim->prox);
+                lista->fim = NULL;
+                inserirTarefa(&lista, novaPrioridade, &descricao);
+            }
+            else {
+
+            }
+        }
+    }*/
 }
