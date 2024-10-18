@@ -1,5 +1,3 @@
-// AINDA PRECISA TERMINAR
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -88,6 +86,10 @@ void inserirTarefa (LDE* lista, int valor, char* descricao) {
 
 void buscaDescricao (LDE lista, char* descricao) {
     int count = 0;
+    if (isEmpty(lista) == 1) {
+        printf("A lista esta vazia!!\n");
+        return;
+    }
     for (ListNode* aux = lista.inicio; aux != NULL; aux = aux->prox) {
         if (strcmp(aux->descricao, descricao) == 0) {
             printf("Existem um total de %d tarefas a serem executadas antes da tarefa requerida.\n", count);
@@ -116,5 +118,33 @@ ListNode* executarTarefa (LDE* lista) {  // NÃO SEI COMO DAR O FREE(AUX) DEPOIS
     }
 }
 
+void cancelarTarefa (LDE* lista, char* descricao) {
+    if (isEmpty(*lista) == 1) {
+        printf("A lista esta vazia!!\n");
+        return;
+    }
+    for (ListNode* aux = lista->inicio; aux != NULL; aux = aux->prox) {
+        if (strcmp(aux->descricao, descricao) == 0) {
+            if (lista->inicio == lista->fim) {
+                free(aux);   // ou free(lista->inicio) ou free(lista->fim)
+                lista->inicio = NULL;
+                lista->fim = NULL;
+            }
+            else if (strcmp(lista->fim->descricao, descricao) == 0) {  // ou if (aux == lista->fim)
+                lista->fim = lista->fim->ant;
+                free(lista->fim->prox);  // ou free(aux)
+                lista->fim->prox = NULL;
+            }
+            else {
+                aux->ant->prox = aux->prox;
+                aux->prox->ant = aux->ant;
+                free(aux);
+            }
+            lista->qtd--;
+            printf("Tarefa cancelada!!\n");
+        }
+    }
+    printf("Descricao nao bate com as descricoes cadastradas!!\n");
+}
 
 
