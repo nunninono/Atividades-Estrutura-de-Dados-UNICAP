@@ -149,7 +149,7 @@ void cancelarTarefa (LDE* lista, char* descricao) {
     printf("Descricao nao bate com as descricoes cadastradas!!\n");
 }
 
-void exibirDescricoes (LDE lista, char* descricao, int valor) {
+void exibirDescricoes (LDE lista, int valor) {
     if (isEmpty(lista) == 1) {
         printf("A lista esta vazia!!\n");
         return;
@@ -201,4 +201,83 @@ void mudarPrioridade (LDE* lista, char* descricao, int novaPrioridade) {
             }
         }
     }*/
+}
+
+int main() {
+    LDE lista1;
+    inicializar(&lista1);
+
+    int escolha, num;
+    char texto[50];
+    ListNode* tarefa;
+
+    while(1) {
+        printf("=========================================\n");
+        printf("1. Inserir nova tarefa.\n");
+        printf("2. Buscar tarefa pela descricao.\n");
+        printf("3. Executar tarefa.\n");
+        printf("4. Cancelar execucao especifica.\n");
+        printf("5. Exibir descricoes de uma prioridade.\n");
+        printf("6. Listar todas as tarefas.\n");
+        printf("7. Mudar prioridade.\n");
+        printf("=========================================\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &escolha);
+
+        switch (escolha) {
+            case 1:
+                printf("Insira a prioridade da nova tarefa (ente 1 e 10): ");
+                scanf("%d", &num);
+                if (num < 1 || num > 10) {
+                    printf("\nInisra uma prioridade valida!!\n");
+                    break;
+                }
+                printf("Insira uma descricao para a tarefa: ");
+                scanf("%s", texto);
+                inserirTarefa(&lista1, num, texto);
+                break;
+            
+            case 2:
+                printf("Insira a descricao a ser buscada: ");
+                scanf("%s", texto);
+                buscaDescricao(lista1, texto);
+                break;
+
+            case 3:
+                tarefa = executarTarefa(&lista1);
+                if (tarefa == NULL) {
+                    printf("A lista esta vazia!!\n");
+                    break;
+                }
+                printf ("A tarefa de prioridade %d e descricao ""%d"" foi executada!\n", tarefa->prioridade, tarefa->descricao);
+                break;
+            
+            case 4:
+                printf("Insira a descricao da tarefa a ser cancelada: ");
+                scanf("%s", texto);
+                cancelarTarefa(&lista1, texto);
+                break;
+            
+            case 5:
+                printf("Insira o numero da prioridade: ");
+                scanf("%d", &num);
+                exibirDescricoes(lista1, num);
+                break;
+
+            case 6:
+                listarTarefas(lista1);
+                break;
+
+            case 7:
+                printf("Insira a descricao da tarefa: ");
+                scanf("%s", texto);              
+                printf("Insira a prioridade da tarefa: ");
+                scanf("%d", &num);
+                mudarPrioridade(&lista1, texto, num);
+                break;
+
+            default:
+                break;
+        }
+    }
 }
