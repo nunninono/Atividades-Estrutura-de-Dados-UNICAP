@@ -1,3 +1,5 @@
+// OUTRA APLICAÇÃO - USO DE UMA ESTRUTURA TAREFA
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -92,11 +94,15 @@ void inserirTarefa (LDE* lista, int prioridade, char* descricao) {
                 lista->fim = novoNo;
             }
             else {
-                LDENode* aux = lista->inicio;
-                while (aux->info->prioridade < novoNo->info->prioridade) {
-                    aux = aux->prox;
+                for (ListNode* aux = lista->inicio; aux != NULL; aux = aux->prox) {
+                    if (aux->info->prioridade > novoNo->info->prioridade) {
+                        novoNo->prox = aux;
+                        novoNo->ant = aux->ant;
+                        aux->ant->prox = novoNo;
+                        aux->ant = novoNo;
+                        break;
+                    }
                 }
-                
             }
         }
     }
