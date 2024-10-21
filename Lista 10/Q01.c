@@ -31,3 +31,14 @@ int isEmpty (LDE lista) {
         return 0;
     }
 }
+
+LDENode* criarInfo () {
+    
+}
+
+void inserirFinal (LDE* lista) {
+    
+    if (isEmpty(*lista) == 1) {
+        
+    }
+}
