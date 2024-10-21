@@ -33,7 +33,9 @@ int isEmpty (LDE lista) {
 }
 
 Info* criarInfo (int valor) {
-    
+    novoInfo = (Info*) malloc (sizeof(Info));
+    novoInfo->info = valor;
+    return novoInfo;
 }
 
 LDENode* criarNo () {
