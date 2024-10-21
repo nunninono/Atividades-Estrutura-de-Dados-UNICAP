@@ -32,7 +32,11 @@ int isEmpty (LDE lista) {
     }
 }
 
-LDENode* criarInfo () {
+Info* criarInfo (int valor) {
+    
+}
+
+LDENode* criarNo () {
     
 }
 
