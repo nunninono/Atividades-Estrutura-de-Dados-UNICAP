@@ -78,12 +78,13 @@ void listar (LDECO lista) {
         printf("Lista vazia!!\n");
     }
     else {
-        printf("Valores listados: ");
+        printf("\nValores listados: ");
         LDECONode* aux = lista.inicio;
         do {
             printf("%d ", aux->info);
             aux = aux->prox;
         } while (aux != lista.inicio);
+        printf("\n\n");
     }
 }
 
