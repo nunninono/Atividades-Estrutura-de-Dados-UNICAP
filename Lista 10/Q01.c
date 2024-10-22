@@ -109,3 +109,20 @@ void remover (LDE* lista, int valor) {
         printf("Um total de %d valores foram removidos!!\n", count_achados);
     }
 }
+
+void listar(LDE lista) {
+    if (isEmpty(lista) == 1) {
+        printf("A lista esta vazia!!\n");
+    }
+    else {
+        printf("Valores listados: );
+        for (LDENode* aux = lista->inicio; aux != NULL; aux = aux->prox) {
+            printf("%d ", aux->info->valor);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    
+}
