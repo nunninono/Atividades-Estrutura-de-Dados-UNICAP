@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct ldeNode {
+typedef struct lsecNode {
     int info;
-    struct ldeNode* prox;
-} LSENode;
+    struct lsecNode* prox;
+} LSECNode;
 
 typedef struct lsec {
-    LSENode* inicio;
-    LSENode* fim;
+    LSECNode* inicio;
+    LSECNode* fim;
     int qtd;
 } LSEC;
 
@@ -45,7 +45,7 @@ void listar (LSEC lista) {
         printf("A lista esta vazia!!\n");
     }
     else {
-      for (LSECNode* aux = lista->inicio; aux->prox != lista->inicio->prox; aux = aux->prox) {
+      for (LSECNode* aux = lista.inicio; aux->prox != lista.inicio->prox; aux = aux->prox) {
           printf("%d ",aux->info);
       }
       printf("\n");
@@ -53,7 +53,7 @@ void listar (LSEC lista) {
 }
 
 int main () {
-    LDEC lista1;
+    LSEC lista1;
     inicializar(&lista1);
     
     int escolha;
