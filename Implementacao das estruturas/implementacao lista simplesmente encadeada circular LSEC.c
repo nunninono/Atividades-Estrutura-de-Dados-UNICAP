@@ -55,7 +55,7 @@ void listar (LSEC lista) {
             printf("%d ",aux->info);
             count++;
         }
-        printf("\n");
+        printf("\n\n");
     }
 }
 
