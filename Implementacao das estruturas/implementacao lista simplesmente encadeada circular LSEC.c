@@ -41,7 +41,7 @@ void inserirInicio (LSEC* lista, int valor) {
         lista->fim->prox = novo;
     }
     lista->qtd++;
-    printf("Valor inserido na lista!!\n");
+    printf("Valor inserido na lista!!\n\n");
 }
 
 void listar (LSEC lista) {
@@ -50,6 +50,7 @@ void listar (LSEC lista) {
     }
     else {
         int count = 0;
+        printf("\nValores listados: ");
         for (LSECNode* aux = lista.inicio; count < lista.qtd; aux = aux->prox) {
             printf("%d ",aux->info);
             count++;
