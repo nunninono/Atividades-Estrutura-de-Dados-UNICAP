@@ -1,5 +1,3 @@
-// FALTA A MAIN
-
 #include <stdio.h>
 #include <stlib.h>
 
