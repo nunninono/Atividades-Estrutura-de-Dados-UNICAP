@@ -52,6 +52,43 @@ void listar (LSEC lista) {
     }
 }
 
-int main() {
-  
+int main () {
+    LDEC lista1;
+    inicializar(&lista1);
+    
+    int escolha;
+    int num;
+
+    printf("===========================================\n");
+    printf("1. Inserir valor na lista.\n");
+    printf("2. Listar valores da lista.\n");
+    printf("4. Sair do programa.\n");
+    printf("===========================================\n");
+    
+    
+    while (1) {
+        printf("Escolha uma opção: ");
+        scanf("%d", &escolha);
+        
+        switch (escolha) {
+            case 1:
+                printf("\nInsira o valor a ser inserido: ");
+                scanf("%d", &num);
+                inserirInicio(&lista1, num);
+                break;
+                
+            case 2:
+                listar(lista1);
+                break;
+
+            case 3:
+                printf("\nSaindo do programa...");
+                return 0;
+                break;
+                
+            default:
+                printf("Insira um valor válido!\n");
+                break;
+        }
+    }
 }
