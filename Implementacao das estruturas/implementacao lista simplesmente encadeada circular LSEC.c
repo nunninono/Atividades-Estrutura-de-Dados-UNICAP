@@ -31,10 +31,14 @@ void inserirInicio (LSEC* lista, int valor) {
     LSECNode* novo = (LSECNode*) malloc (sizeof(LSECNode));
     novo->info = valor;
     novo->prox = lista->inicio;
-    lista->fim->prox = novo;   // circular
-    lista->inicio = novo;
     if (isEmpty(*lista) == 1) {
         lista->fim = novo;
+        lista->inicio = novo;
+        lista->fim->prox = novo;
+    }
+    else {
+        lista->inicio = novo;
+        lista->fim->prox = novo;
     }
     lista->qtd++;
     printf("Valor inserido na lista!!\n");
@@ -45,10 +49,12 @@ void listar (LSEC lista) {
         printf("A lista esta vazia!!\n");
     }
     else {
-      for (LSECNode* aux = lista.inicio; aux->prox != lista.inicio->prox; aux = aux->prox) {
-          printf("%d ",aux->info);
-      }
-      printf("\n");
+        int count = 0;
+        for (LSECNode* aux = lista.inicio; count < lista.qtd; aux = aux->prox) {
+            printf("%d ",aux->info);
+            count++;
+        }
+        printf("\n");
     }
 }
 
