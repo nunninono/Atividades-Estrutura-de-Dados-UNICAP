@@ -44,7 +44,7 @@ void inserirInicio (LSEC* lista, int valor) {
     printf("Valor inserido na lista!!\n\n");
 }
 
-void listar (LSEC lista) {
+void listar (LSEC lista) {       // DO WHILE É O MAIS EFICIENTE PARA FAZER ISSO
     if (isEmpty(lista) == 1) {
         printf("A lista esta vazia!!\n");
     }
