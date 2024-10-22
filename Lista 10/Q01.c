@@ -1,5 +1,7 @@
+// FALTA A MAIN
+
 #include <stdio.h>
-#include <stlib.h>
+#include <stdlib.h>
 
 typedef struct info {
     int valor;
@@ -12,8 +14,8 @@ typedef struct ldeNode {
 } LDENode;
 
 typedef struct lde {
-    ListNode* inicio;
-    ListNode* fim;
+    LDENode* inicio;
+    LDENode* fim;
     int qtd;
 } LDE;
 
@@ -33,16 +35,16 @@ int isEmpty (LDE lista) {
 }
 
 Info* criarInfo (int valor) {
-    novoInfo = (Info*) malloc (sizeof(Info));
+    Info* novoInfo = (Info*) malloc (sizeof(Info));
     novoInfo->valor = valor;
     return novoInfo;
 }
 
 LDENode* criarNo (Info* novoInfo) {
-    novoNo = (LDENode*) malloc (sizeof(LDENode*));
+    LDENode* novoNo = (LDENode*) malloc (sizeof(LDENode*));
     novoNo->ant = NULL;
     novoNo->prox = NULL;
-    novoNo->info = noveInfo;
+    novoNo->info = novoInfo;
     return novoNo;
 }
 
@@ -59,7 +61,7 @@ void inserirFinal (LDE* lista, int valor) {
         lista->fim = novoNo;
     }
     lista->qtd++;
-    printf("Valor foi inserido na lista!\n");
+    printf("\nValor foi inserido na lista!\n\n");
 }
 
 void remover (LDE* lista, int valor) {
@@ -67,57 +69,56 @@ void remover (LDE* lista, int valor) {
         printf("A lista esta vazia!\n");
         return;
     }
-    for (ListNode* aux = lista->inicio; aux != NULL; aux = aux->prox) {
-        int count_achados = 0;
-        int count_nao_achados = 0;
+    int count= 0;
+    for (LDENode* aux = lista->inicio; aux != NULL; aux = aux->prox) {
         if (aux->info->valor == valor) {
             if (aux == lista->inicio && aux == lista->fim) {
                 free(aux);
                 lista->inicio = NULL;
                 lista->fim = NULL;
-                count_achados++;
+                count++;
             }
             else if (aux == lista->inicio) {
                 lista->inicio = lista->inicio->prox;
                 free(lista->inicio->ant);
                 lista->inicio->ant = NULL;
                 lista->qtd--;
-                count_achados++;
+                count++;
             }
             else if (aux == lista->fim) {
-                lista->fim = lista->inicio->ant;
+                lista->fim = lista->fim->ant;
                 free(lista->fim->prox);
                 lista->fim->prox = NULL;
                 lista->qtd--;
-                count_achados++;
+                count++;
             }
             else {
                 aux->ant->prox = aux->prox;
                 aux->prox->ant = aux->ant;
                 free(aux);
                 lista->qtd--;
-                count_achados++;
+                count++;
             }
         }
     }
-    if (count_achados == 0) {
-        printf("Nao foi encontrado nenhum %d na lista!\n", valor);
+    if (count == 0) {
+        printf("\nNao foi encontrado nenhum %d na lista!\n\n", valor);
     }
     else {
-        printf("Um total de %d valores foram removidos!!\n", count_achados);
+        printf("\nUm total de %d valores foram removidos!!\n\n", count);
     }
 }
 
 void listar(LDE lista) {
     if (isEmpty(lista) == 1) {
-        printf("A lista esta vazia!!\n");
+        printf("\nA lista esta vazia!!\n\n");
     }
     else {
-        printf("Valores listados: );
-        for (LDENode* aux = lista->inicio; aux != NULL; aux = aux->prox) {
+        printf("\nValores listados: ");
+        for (LDENode* aux = lista.inicio; aux != NULL; aux = aux->prox) {
             printf("%d ", aux->info->valor);
         }
-        printf("\n");
+        printf("\n\n");
     }
 }
 
@@ -144,7 +145,7 @@ int main () {
             case 1:
                 printf("\nInsira o valor a ser inserido: ");
                 scanf("%d", &num);
-                inserirValor(&lista1, num);
+                inserirFinal(&lista1, num);
                 break;
                 
             case 2:
