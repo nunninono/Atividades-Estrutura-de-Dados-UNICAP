@@ -73,36 +73,39 @@ void remover (LDE* lista, int valor) {
         int count_achados = 0;
         int count_nao_achados = 0;
         if (aux->info->valor == valor) {
-            if (aux == lista->inicio) {
+            if (aux == lista->inicio && aux == lista->fim) {
+                free(aux);
+                lista->inicio = NULL;
+                lista->fim = NULL;
+                count_achados++;
+            }
+            else if (aux == lista->inicio) {
                 lista->inicio = lista->inicio->prox;
                 free(lista->inicio->ant);
                 lista->inicio->ant = NULL;
                 lista->qtd--;
-                count++;
+                count_achados++;
             }
             else if (aux == lista->fim) {
                 lista->fim = lista->inicio->ant;
                 free(lista->fim->prox);
                 lista->fim->prox = NULL;
                 lista->qtd--;
-                count++;
+                count_achados++;
             }
             else {
                 aux->ant->prox = aux->prox;
                 aux->prox->ant = aux->ant;
                 free(aux);
                 lista->qtd--;
-                count++;
+                count_achados++;
             }
         }
-        else {
-            count_nao_achados++;
-        }
     }
-    if (count_nao_achados == lista->qtd) {
+    if (count_achados == 0) {
         printf("Nao foi encontrado nenhum %d na lista!\n", valor);
     }
     else {
-        printf("Um total de %d valores foram removidos!!\n", count);
+        printf("Um total de %d valores foram removidos!!\n", count_achados);
     }
 }
