@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct ldeocNode {
+typedef struct ldecoNode {
     struct ldecoNode* ant;
     int info;
     struct ldecoNode* prox;
@@ -29,7 +29,7 @@ int isEmpty (LDECO lista) {
 }
 
 void inserir (LDECO* lista, int valor) {
-    LDECONode* novo = (LDEONode*) malloc (sizeof(LDEONode)); 
+    LDECONode* novo = (LDECONode*) malloc (sizeof(LDECONode)); 
     novo->info = valor;
     if (isEmpty(*lista) == 1) {
         lista->inicio = novo;
@@ -37,14 +37,14 @@ void inserir (LDECO* lista, int valor) {
         lista->fim->prox = lista->inicio;
         lista->inicio->ant = lista->fim;
     }
-    else if (valor < lista->inicio) {
+    else if (valor < lista->inicio->info) {
         lista->inicio->ant = novo;
         novo->prox = lista->inicio;
         lista->inicio = lista->inicio->ant;
         lista->fim->prox = lista->inicio;
         lista->inicio->ant = lista->fim;
     }
-    else if (valor > lista->fim) {
+    else if (valor > lista->fim->info) {
         lista->fim->prox = novo;
         novo->ant = lista->fim;
         lista->fim = lista->fim->prox;
@@ -52,36 +52,78 @@ void inserir (LDECO* lista, int valor) {
         lista->inicio->ant = lista->fim;
     }
     else {
+        LDECONode* aux = lista->inicio;
         do {
-            LDECONode* aux = lista->inicio;
             if (valor == aux->info) {
                 printf("Valor ja presente na lista!!!\n");
                 free(novo);
                 return;
             }
-            else if (aux->info < valor && aux->prox->info > valor){
-                novo->prox = aux->prox;
-                novo->ant = aux;
-                aux->prox->ant = novo;
-                aux->prox = novo;
+            else if (aux->ant->info < valor && aux->info > valor){
+                novo->prox = aux;
+                novo->ant = aux->ant;
+                aux->ant->prox = novo;
+                aux->ant = novo;
             }
             aux = aux->prox;
         } while (aux != lista->inicio);
+        printf("\n");
     }
     lista->qtd++;
-    printf("Valor inserido na lista!!\n");
+    printf("Valor inserido na lista!!\n\n");
 }
 
 void listar (LDECO lista) {
     if (isEmpty(lista) == 1) {
-        pritnf("Lista vazia!!\n");
+        printf("Lista vazia!!\n");
     }
     else {
         printf("Valores listados: ");
+        LDECONode* aux = lista.inicio;
         do {
-            LDECONode* aux = lista.inicio;
             printf("%d ", aux->info);
             aux = aux->prox;
-        } while (aux != lista->inicio);
+        } while (aux != lista.inicio);
+    }
+}
+
+int main () {
+    LDECO lista1;
+    inicializar(&lista1);
+    
+    int escolha;
+    int num;
+
+    printf("===========================================\n");
+    printf("1. Inserir valor na lista.\n");
+    printf("2. Listar valores da lista.\n");
+    printf("4. Sair do programa.\n");
+    printf("===========================================\n");
+    
+    
+    while (1) {
+        printf("Escolha uma opção: ");
+        scanf("%d", &escolha);
+        
+        switch (escolha) {
+            case 1:
+                printf("\nInsira o valor a ser inserido: ");
+                scanf("%d", &num);
+                inserir(&lista1, num);
+                break;
+                
+            case 2:
+                listar(lista1);
+                break;
+
+            case 3:
+                printf("\nSaindo do programa...");
+                return 0;
+                break;
+                
+            default:
+                printf("Insira um valor válido!\n");
+                break;
+        }
     }
 }
