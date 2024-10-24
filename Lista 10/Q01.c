@@ -204,3 +204,25 @@ void removerTodos (LSEC* lista) {
         }
     }
 }
+
+void removerTodos (LSEC* lista) {
+    if (isEmpty(*lista) == 1) {
+        printf("Lista vazia!!\n");
+        return;
+    }
+    while(1) {
+        if (isEmpty(*lista) == 0) {
+            printf("Todos os valores foram removidos!!\n");
+            return;
+        }
+        else {
+            removerInicio(*lista);
+        }
+    }
+}
+
+int main () {
+    LSEC lista1;
+    inicializar(&lista1);
+    
+}
