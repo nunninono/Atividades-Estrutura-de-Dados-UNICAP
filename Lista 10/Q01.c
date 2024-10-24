@@ -189,4 +189,18 @@ void exibirValores (LSEC lista) {
     printf("\n\n");
 }
 
-
+void removerTodos (LSEC* lista) {
+    if (isEmpty(*lista) == 1) {
+        printf("A lista esta vazia!!\n");
+        return;
+    }
+    while(1) {
+        if (isEmpty(*lista) == 0) {
+            printf("Todos os valores foram removidos!!\n");
+            return;
+        }
+        else {
+            removerInicio(*lista);
+        }
+    }
+}
