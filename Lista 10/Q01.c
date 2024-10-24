@@ -95,3 +95,66 @@ void inserirFinal (LSEC* lista, int valor) {
     lista->qtd++;
     printf("Valor inserido na lista!!\n");
 }
+
+void removerInicio (LSEC* lista) {
+    if (isEmpty(*lista) == 1) {
+        printf("A lista esta vazia!!\n");
+        return;
+    }
+    else if (lista->inicio == lista->fim) {
+        free(lista->inicio);
+        lista->inicio = NULL;
+        lista->fim = NULL;
+    }
+    else {
+        LSECNode* aux = lista->inicio;
+        lista->inicio = lista->inicio->prox;
+        free(aux);
+        lista->fim->prox = lista->inicio;
+    }
+    lista->qtd--;
+    printf("Remocao efetuada!!\n");
+}
+
+void removerFim (LSEC* lista) {
+    if (isEmpty(*lista) == 1) {
+        printf("A lista esta vazia!!\n");
+        return;
+    }
+    else if (lista->fim == lista->inicio) {
+        free(lista->fim);
+        lista->fim = NULL;
+        lista->inicio = NULL;
+    }
+    else {
+        for (LSECNode* aux = lista->inicio; aux->prox != lista->fim; aux = aux->prox);
+        free(lista->fim);
+        lista->fim = aux;
+        lista->fim->prox = lista->inicio;
+    }
+    lista->qtd--;
+    printf("R emocao efetuada!!\n");
+}
+
+void removerEspecifico (LSEC* lista, int valor) {
+    if (isEmpty(*lista) == 1) {
+        printf("A lista esta vazia!!\n");
+        return;
+    }
+    else if (lista->inicio == lista->fim) {
+        free(lista->inicio);
+        lista->inicio = NULL;
+        lista->fim = NULL;
+    }
+    else {
+        LSECnode* aux = lista->inicio;
+        do {
+            if (aux->info == valor) {
+                
+            }
+            else {
+                aux = aux->prox;
+            }
+        } while (aux != lista->inicio);
+    }
+}
