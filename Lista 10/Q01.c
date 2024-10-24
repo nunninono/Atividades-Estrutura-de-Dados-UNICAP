@@ -145,16 +145,48 @@ void removerEspecifico (LSEC* lista, int valor) {
         free(lista->inicio);
         lista->inicio = NULL;
         lista->fim = NULL;
+        lista->qtd--;
+        printf("Remocao efetuada!!\n");
     }
     else {
-        LSECnode* aux = lista->inicio;
+        LSECnode* aux = lista->inicio->prox;
+        LSECNode* auxAnt = lista->inicio;
+        if (auxAnt->info == valor) {
+            free(auxAnt);
+            lista->inicio = aux;
+            lista->fim->prox = lista->inicio;
+            lista->qtd--;
+            printf("Remocao efetuada!!\n");
+            return;
+        }
         do {
             if (aux->info == valor) {
-                
+                auxAnt->prox = aux->prox;
+                free(aux);
+                lista->qtd--;
+                printf("Remocao efetuada!!\n");
+                return;
             }
             else {
+                auxAnt = aux;
                 aux = aux->prox;
             }
         } while (aux != lista->inicio);
+        printf("Valor nao encontrado na lista!\n");
     }
 }
+
+void exibirValores (LSEC lista) {
+    if (isEmpty(lista) == 1) {
+        printf("A lista esta vazia!!\n");
+        return;
+    }
+    LSENode* aux = lista.inicio;
+    printf("Valores listados: ");
+    do {
+        printf("%d ", aux->info);    
+    } while (aux != lista.inicio);
+    printf("\n\n");
+}
+
+
