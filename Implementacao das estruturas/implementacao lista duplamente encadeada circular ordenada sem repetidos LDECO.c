@@ -28,9 +28,14 @@ int isEmpty (LDECO lista) {
     }
 }
 
-void inserir (LDECO* lista, int valor) {
+LDECONode* criarNo(int valor) {
     LDECONode* novo = (LDECONode*) malloc (sizeof(LDECONode)); 
     novo->info = valor;
+    return novo;
+}
+
+void inserir (LDECO* lista, int valor) {
+    LDECONode* novo = criarNo(valor);
     if (isEmpty(*lista) == 1) {
         lista->inicio = novo;
         lista->fim = novo;
