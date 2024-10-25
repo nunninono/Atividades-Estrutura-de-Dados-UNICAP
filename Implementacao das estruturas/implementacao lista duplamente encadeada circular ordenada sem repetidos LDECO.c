@@ -60,7 +60,7 @@ void inserir (LDECO* lista, int valor) {
         LDECONode* aux = lista->inicio;
         do {
             if (valor == aux->info) {
-                printf("Valor ja presente na lista!!!\n");
+                printf("Valor ja presente na lista!!!\n\n");
                 free(novo);
                 return;
             }
