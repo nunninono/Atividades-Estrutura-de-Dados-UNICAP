@@ -203,6 +203,8 @@ void removerTodos (LSEC* lista) {
         }
         else {
             removerInicio(lista);
+            lista->inicio = NULL;
+            lista->fim = NULL;
         }
     }
 }
