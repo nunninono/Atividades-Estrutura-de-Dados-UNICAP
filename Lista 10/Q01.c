@@ -221,6 +221,67 @@ void removerTodos (LSEC* lista) {
     }
 }
 
+void exibirOpcoes() {
+    printf("Opcoes:\n");
+    printf("1- Inserir valor no inicio:\n");
+    printf("2- Inserir valor no final:\n");
+    printf("3- Remover primeiro da lista:\n");
+    printf("4- Remover o ultimo da lista:\n");
+    printf("5- Remover um especifico da lista:\n");
+    printf("6- Exibir todos os valores da lista:\n");
+    printf("0- Encerrar programa.\n");
+    printf("Informe a opcao desejada: ");
+}
+
+int main () {
+    LSEC lista1;
+    inicializar(&lista1);
+    
+    int opcao, num;
+    
+    do {
+        exibirOpcoes();
+        scanf("%d", &opcao);
+        switch(opcao) {
+            case 1:
+                printf("Informe o valor a ser inserido no inicio: ");
+                scanf("%d", &num);
+                inserirInicio(&lista1, num);
+                break;
+            
+            case 2:
+                printf("Informe o valor a ser inserido no final: ");
+                scanf("%d", &num);
+                inserirFinal(&lista1, num);
+                break;
+                
+            case 3:
+                removerInicio(&lista1);
+                break;
+            
+            case 4:
+                removerFim(&lista1);
+                break;
+            
+            case 5:
+                printf("Informe o valor a ser removido: ");
+                scanf("%d", &num);
+                removerEspecifico(&lista1, num);
+                break;
+                
+            case 6:
+                exibirValores(lista);
+                break;
+            
+            case 0:
+                removerTodos(&lista1);
+                printf("Saindo do programa...\n");
+                break;
+        }
+    } while(opcao != 0);
+    return 0;
+}
+
 int main () {
     LSEC lista1;
     inicializar(&lista1);
