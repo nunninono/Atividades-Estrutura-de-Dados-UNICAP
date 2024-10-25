@@ -69,6 +69,7 @@ void inserir (LDECO* lista, int valor) {
                 novo->ant = aux->ant;
                 aux->ant->prox = novo;
                 aux->ant = novo;
+                break;
             }
             aux = aux->prox;
         } while (aux != lista->inicio);
