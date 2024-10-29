@@ -36,7 +36,7 @@ int isEmpty(LDEC lista) {
 }
 
 Dados* criarDados (char* nome, float media_final, int quantidade_faltas) {
-    Dados* novosDados = (Dados*) malloc (sizeof(Dados*));
+    Dados* novosDados = (Dados*) malloc (sizeof(Dados));
     strcpy(novosDados->nome, nome);
     novosDados->media_final = media_final;
     novosDados->quantidade_faltas = quantidade_faltas;
@@ -44,7 +44,7 @@ Dados* criarDados (char* nome, float media_final, int quantidade_faltas) {
 }
 
 LDECNode* criarNo (Dados* novosDados) {
-    LDECNode* novoNo = (LDECNode*) malloc (sizeof(LDECNode*));
+    LDECNode* novoNo = (LDECNode*) malloc (sizeof(LDECNode));
     novoNo->info = novosDados;
     return novoNo;
 }
@@ -58,30 +58,48 @@ void cadastrar (LDEC* lista, char* nome, float media_final, int quantidade_falta
         lista->inicio = novoNo;
         lista->fim->prox = lista->inicio;
         lista->inicio->ant = lista->fim;
+        printf("Cadastro realizado!!\n");
         lista->qtd++;
+        return;
     }
     else {
         LDECNode* aux = lista->inicio;
         do {
-            if (strcpy(aux->info->nome, novoNo->info->nome) == 0) {
+            if (strcmp(aux->info->nome, novoNo->info->nome) == 0) {
                 free(novoNo);
                 printf("Ja existe um aluno com esse nome!\n");
                 return;
             }
-
             aux = aux->prox;
         } while (aux != lista->inicio);
 
-        if (strcmp(novoNo->info->nome, lista->inicio->info->nome) < 0) { // > 0 se o primeiro termo vier antes do segundo
+        if (strcmp(novoNo->info->nome, lista->inicio->info->nome) < 0) { // < 0 se o primeiro termo vier antes do segundo
             novoNo->prox = lista->inicio;
             novoNo->ant = lista->fim;
             lista->fim->prox = novoNo;
             lista->inicio->ant = novoNo;
             lista->inicio = novoNo;
         }
-        else if (strcmp()) {
-            
+        else if (strcmp(novoNo->info->nome, lista->fim->info->nome) > 0) { // > 0 se o primeiro termo vier depois do segundo
+            novoNo->ant = lista->fim;
+            novoNo->prox = lista->inicio;
+            lista->inicio->ant = novoNo;
+            lista->fim->prox = novoNo;
+            lista->fim = novoNo;
         }
-        
+        else {
+            aux = lista->inicio;
+            do {
+                if (strcmp(aux->info->nome, novoNo->info->nome) < 0) {
+                    novoNo->prox = aux;
+                    novoNo->ant = aux->ant;
+                    aux->ant->prox = novoNo;
+                    aux->ant = novoNo;
+                }
+                aux = aux->prox;
+            } while (aux != lista->inicio);
+        }
+        lista->qtd++;
+        printf("Cadastro realizado!!\n");
     }
 }
