@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct dados {
     char nome[100];
@@ -31,5 +32,35 @@ int isEmpty(LDEC* lista) {
     }
     else {
         return 0;
+    }
+}
+
+Dados* criarDados (char* nome, float media_final, int quantidade_faltas) {
+    Dados* novosDados = (Dados*) malloc (sizeof(Dados*));
+    strcpy(novosDados->nome, nome);
+    novosDados->media_final = media_final;
+    novosDados->quantidade_faltas = quantidade_faltas;
+    return novosDados;
+}
+
+LDECNode* criarNo (Dados* novosDados) {
+    LDECNode* novoNo = (LDECNode*) malloc (sizeof(LDECNode*));
+    novoNo->info = novosDados;
+    return novoNo;
+}
+
+void cadastrar (LDEC* lista, char* nome, float media_final, int quantidade_faltas) {
+    Dados* novosDados = criarDados(nome, media_final, quantidade_faltas);
+    LDECNode* novoNo = criarNo(novosDados);
+
+    if (isEmpty(lista) == 1) {
+        lista->fim = novoNo;
+        lista->inicio = novoNo;
+        lista->fim->prox = lista->inicio;
+        lista->inicio->ant = lista->fim;
+        lista->qtd++;
+    }
+    else {
+        
     }
 }
