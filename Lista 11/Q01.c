@@ -26,8 +26,8 @@ void inicialize (LDEC* lista) {
     lista->qtd = 0;
 }
 
-int isEmpty(LDEC* lista) {
-    if (lista->fim == NULL && lista->inicio == NULL) {
+int isEmpty(LDEC lista) {
+    if (lista.fim == NULL && lista.inicio == NULL) {
         return 1;
     }
     else {
@@ -53,7 +53,7 @@ void cadastrar (LDEC* lista, char* nome, float media_final, int quantidade_falta
     Dados* novosDados = criarDados(nome, media_final, quantidade_faltas);
     LDECNode* novoNo = criarNo(novosDados);
 
-    if (isEmpty(lista) == 1) {
+    if (isEmpty(*lista) == 1) {
         lista->fim = novoNo;
         lista->inicio = novoNo;
         lista->fim->prox = lista->inicio;
@@ -61,6 +61,27 @@ void cadastrar (LDEC* lista, char* nome, float media_final, int quantidade_falta
         lista->qtd++;
     }
     else {
+        LDECNode* aux = lista->inicio;
+        do {
+            if (strcpy(aux->info->nome, novoNo->info->nome) == 0) {
+                free(novoNo);
+                printf("Ja existe um aluno com esse nome!\n");
+                return;
+            }
+
+            aux = aux->prox;
+        } while (aux != lista->inicio);
+
+        if (strcmp(novoNo->info->nome, lista->inicio->info->nome) < 0) { // > 0 se o primeiro termo vier antes do segundo
+            novoNo->prox = lista->inicio;
+            novoNo->ant = lista->fim;
+            lista->fim->prox = novoNo;
+            lista->inicio->ant = novoNo;
+            lista->inicio = novoNo;
+        }
+        else if (strcmp()) {
+            
+        }
         
     }
 }
