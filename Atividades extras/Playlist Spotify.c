@@ -73,7 +73,6 @@ void adicionarMusica (LDEC* lista, char* titulo_da_musica, char* artista, char* 
 
 LDECNode* buscar (LDEC lista, char* titulo_da_musica) {
     if (isEmpty(lista) == 1) {
-        printf("Lista vazia!!\n");
         return NULL;
     }
     else {
@@ -150,6 +149,43 @@ void limparLista (LDEC* lista) {
         printf("A lista ja esta vazia!\n");
     }
     else {
-        
+        LDECNode* aux = lista->inicio->prox;
+        do {
+            if (lista->inicio == aux && lista->fim == aux) {
+                free(aux);
+                lista->qtd--;
+            }
+            else {
+                free(aux->ant);
+                lista->qtd--;
+            }
+            aux = aux->prox;
+        } while (lista->qtd != 0);
+        printf("Lista esta limpa!\n");
     }
 }
+
+void buscarMusica (LDEC lista, char* nome) {
+    if (isEmpty(lista) == 1) {
+        printf("A lista esta vazia!!\n");
+    }
+    else {
+        LDECNode* aux = buscar(lista, nome);
+        if (aux != NULL) {
+            printf("Dados da musica: %s (%s)\n", aux->info->titulo_da_musica, aux->info->duracao);
+            printf("           %s\n\n", aux->info->duracao);
+        }
+        else {
+            printf("Musica nao encontrada!\n");
+        }
+    }
+}
+
+void ordenarAlfabeticamente (LDEC* lista) {
+    /* POR FAZER */
+}
+
+void contarMusicas (LDEC lista) {
+    printf("A lista possui um total de %d musicas!!\n", lista.qtd);
+}
+
