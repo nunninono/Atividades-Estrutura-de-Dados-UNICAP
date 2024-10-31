@@ -68,4 +68,88 @@ void adicionarMusica (LDEC* lista, char* titulo_da_musica, char* artista, char* 
         lista->inicio->ant = lista->fim;
     }
     lista->qtd++;
+    printf("Nova musica foi inserida!!\n");
+}
+
+LDECNode* buscar (LDEC lista, char* titulo_da_musica) {
+    if (isEmpty(lista) == 1) {
+        printf("Lista vazia!!\n");
+        return NULL;
+    }
+    else {
+        LDECNode* aux;
+        do {
+            if (strcmp(aux->info->titulo_da_musica, titulo_da_musica) == 0) {
+                return aux;
+            }
+            else {
+                aux = aux->prox;
+            }
+        } while (aux != lista.inicio);
+        return NULL;
+    }
+}
+
+void removerMusica (LDEC* lista, char* titulo_da_musica) {
+    if (isEmpty(*lista) == 1) {
+        printf("Lista vazia!!\n");
+        return;
+    }
+    else {
+        LDECNode* aux = buscar(*lista, titulo_da_musica);
+        if (buscar != NULL) {
+            if (lista->inicio == aux && lista->fim == aux) {
+                free(aux);
+                lista->fim = NULL;
+                lista->fim = NULL;
+            }
+            else if (lista->inicio == aux) {
+                lista->inicio = lista->inicio->prox;
+                free(aux);
+                lista->fim->prox = lista->inicio;
+                lista->inicio->ant = lista->fim;
+            }
+            else if (lista->fim == aux) {
+                lista->fim = lista->fim->ant;
+                free(aux);
+                lista->fim->prox = lista->inicio;
+                lista->inicio->ant = lista->fim;
+            }
+            else {
+                aux->ant->prox = aux->prox;
+                aux->prox->ant = aux->ant;
+                free(aux);
+            }
+            lista->qtd--;
+            printf("Musica removida!!\n");
+        }
+        else {
+            printf("Musica nao encontrada!!\n");
+        }
+    }
+}
+
+void listarMusicas (LDEC lista) {
+    if (isEmpty(lista) == 1) {
+        printf("Lista vazia!!\n");
+        return;
+    }
+    else {
+        int contador = 1;
+        LDECNode* aux;
+        do {
+            printf("Musica %d: %s (%s)\n", contador, aux->info->titulo_da_musica, aux->info->duracao);
+            printf("           %s\n\n", aux->info->duracao);
+            aux = aux->prox;
+        } while (aux != lista.inicio);
+    }
+}
+
+void limparLista (LDEC* lista) {
+    if (isEmpty(*lista) == 1) {
+        printf("A lista ja esta vazia!\n");
+    }
+    else {
+        
+    }
 }
