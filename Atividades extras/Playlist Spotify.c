@@ -43,8 +43,12 @@ Musica* novaMusica (char* titulo_da_musica, char* artista, char* duracao) {
     return novaMusica;
 }
 
-LDECNode* novoNo (Musica* musica) {
-    
+LDECNode* novoNo (Musica* novaMusica) {
+    novoNo = LDECNode* malloc (sizeof(LDECNode));
+    novoNo->ant = NULL;
+    novoNo->info = novaMusica;
+    novoNo->prox = NULL;
+    return novoNo;
 }
 
 void adicionarMusica (LDEC* lista)
