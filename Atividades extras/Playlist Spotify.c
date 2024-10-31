@@ -5,7 +5,7 @@
 typedef struct musica {
     char[100] titulo_da_musica;
     char[50] artista;
-    float duracao;
+    char[20] duracao;
 } Musica;
 
 typedef struct ldecNode {
@@ -35,9 +35,16 @@ int isEmpty (LDEC lista) {
     }
 }
 
-Musica* novaMusica (char* titulo_da_musica, char* artista, float duracao) {}
+Musica* novaMusica (char* titulo_da_musica, char* artista, char* duracao) {
     novaMusica = (Musica*) malloc (sizeof(Musica));
-    novaMusica->
-LDECNode*
+    strcpy(novaMusica->titulo_da_musica, titulo_da_musica);
+    strcpy(novaMusica->artista, artista);
+    strcpy(novaMusica->duracao, duracao);
+    return novaMusica;
+}
+
+LDECNode* novoNo (Musica* musica) {
+    
+}
 
 void adicionarMusica (LDEC* lista)
