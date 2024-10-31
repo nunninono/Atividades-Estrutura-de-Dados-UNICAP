@@ -189,3 +189,81 @@ void alterarQuantidadeDeFaltas (LDEC* lista, char* nome) {
         }
     }
 }
+
+void exibirDados (LDEC lista, char* nome) {
+    if (isEmpty(lista) == 1) {
+        printf("A lista esta vazia!!\n");
+        return;
+    }
+    LDECNode* aux = consultar(lista, nome); 
+    if (aux != NULL) {
+        printf("Dados do aluno(%s):\n", aux->info->nome);
+        printf("quantidade de faltas: %d\n", aux->info->quantidade_faltas);
+        printf("media final: %f\n\n", aux->info->media_final);
+    }
+    else {
+        printf("O nome do aluno nao foi encontrado!!\n");
+    }
+}
+
+void removerAluno (LDEC* lista, char* nome) {
+    if (isEmpty(*lista) == 1) {
+        printf("A lista esta vazia!!\n");
+        return;
+    }
+    LDECNode* aux = consultar(*lista, nome); 
+    if (aux != NULL) {
+        if (lista->inicio == aux && lista->fim == aux) {
+            free(aux);
+            lista->inicio = NULL;
+            lista->fim = NULL;
+        }
+        else if (lista->inicio == aux) {
+            lista->inicio = lista->inicio->prox;
+            free(aux);
+            lista->fim->prox = lista->inicio;
+            lista->inicio->ant = lista->fim;
+        }
+        else if (lista->fim == aux) {
+            lista->fim->ant = lista->inicio;
+            free(aux);
+            lista->inicio->ant = lista->fim;
+            lista->fim->prox = lista->inicio;
+        }
+        else {
+            aux->ant->prox = aux->prox;
+            aux->prox->ant = aux->ant;
+            free(aux);
+        }
+        lista->qtd--;
+        printf("Aluno removido do cadastro!!\n");
+    }
+    else {
+        printf("O nome do aluno nao foi encontrado!!\n");
+    }
+}
+
+void limparCadastro (LDEC* lista) {
+    if (isEmpty(*lista) == 1) {
+        printf("O cadastro esta vazio!!\n");
+    }
+    else {
+        LDECNode* aux = lista->inicio->prox;
+        do {
+            if (lista->inicio == aux && lista->fim == aux) {
+                free(aux);
+                lista->qtd--;
+            }
+            else {
+                free(aux->ant);
+                lista->qtd--;
+            }
+            aux = aux->prox;
+        } while (lista->qtd != 0);
+    }
+}
+
+int main () {
+    /*POR FAZER*/
+    return 0;
+}
