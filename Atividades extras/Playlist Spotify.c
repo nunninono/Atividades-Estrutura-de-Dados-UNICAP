@@ -51,4 +51,21 @@ LDECNode* novoNo (Musica* novaMusica) {
     return novoNo;
 }
 
-void adicionarMusica (LDEC* lista)
+void adicionarMusica (LDEC* lista, char* titulo_da_musica, char* artista, char* duracao) {
+    Musica* novaMusica = novaMusica(titulo_da_musica, artista, duracao);
+    LDECNode* novoNo = novoNo(novaMusica);
+    if (isEmpty(*lista) == 1) {
+        lista->inicio = novoNo;
+        lista->fim = novoNo;
+        lista->fim->prox = lista->inicio;
+        lista->inicio->ant = lista->fim;
+    }
+    else {
+        lista->fim->prox = novoNo;
+        novoNo->ant = lista->fim;
+        lista->fim = novoNo;
+        lista->fim->prox = lista->inicio;
+        lista->inicio->ant = lista->fim;
+    }
+    lista->qtd++;
+}
