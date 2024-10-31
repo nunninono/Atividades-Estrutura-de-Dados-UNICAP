@@ -189,3 +189,7 @@ void contarMusicas (LDEC lista) {
     printf("A lista possui um total de %d musicas!!\n", lista.qtd);
 }
 
+int main () {
+    /* POR FAZER */
+    return 0;
+}
