@@ -3,9 +3,9 @@
 #include <string.h>
 
 typedef struct musica {
-    char[100] titulo_da_musica;
-    char[50] artista;
-    char[20] duracao;
+    char titulo_da_musica[100];
+    char artista[50];
+    char duracao[20];
 } Musica;
 
 typedef struct ldecNode {
@@ -35,16 +35,16 @@ int isEmpty (LDEC lista) {
     }
 }
 
-Musica* novaMusica (char* titulo_da_musica, char* artista, char* duracao) {
-    novaMusica = (Musica*) malloc (sizeof(Musica));
+Musica* criarMusica (char* titulo_da_musica, char* artista, char* duracao) {
+    Musica* novaMusica = (Musica*) malloc (sizeof(Musica));
     strcpy(novaMusica->titulo_da_musica, titulo_da_musica);
     strcpy(novaMusica->artista, artista);
     strcpy(novaMusica->duracao, duracao);
     return novaMusica;
 }
 
-LDECNode* novoNo (Musica* novaMusica) {
-    novoNo = LDECNode* malloc (sizeof(LDECNode));
+LDECNode* criarNo (Musica* novaMusica) {
+    LDECNode* novoNo = (LDECNode*) malloc (sizeof(LDECNode));
     novoNo->ant = NULL;
     novoNo->info = novaMusica;
     novoNo->prox = NULL;
@@ -52,8 +52,8 @@ LDECNode* novoNo (Musica* novaMusica) {
 }
 
 void adicionarMusica (LDEC* lista, char* titulo_da_musica, char* artista, char* duracao) {
-    Musica* novaMusica = novaMusica(titulo_da_musica, artista, duracao);
-    LDECNode* novoNo = novoNo(novaMusica);
+    Musica* novaMusica = criarMusica(titulo_da_musica, artista, duracao);
+    LDECNode* novoNo = criarNo(novaMusica);
     if (isEmpty(*lista) == 1) {
         lista->inicio = novoNo;
         lista->fim = novoNo;
