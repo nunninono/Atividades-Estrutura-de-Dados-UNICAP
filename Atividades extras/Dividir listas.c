@@ -84,7 +84,7 @@ LDEC* dividir (LDEC* lista) {
         int quantidade = lista->qtd / 2;
         contador = 0;
         if (lista->incio == lista->fim) {
-            // IMPLEMENTAR
+            return listaAux;
         }
         else if ((lista->qtd)%2 == 1) {
             quantidade++;
@@ -134,6 +134,9 @@ void retirarTudo (LDE* lista) {
     }
     else {
         // IMPLEMENTAR
+        do {
+            
+        } while (lista->qtd > 1);
     }
 }
 
