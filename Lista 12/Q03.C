@@ -149,27 +149,28 @@ LDEC dividir (LDEC* lista1) {
         lista1->qtd = metade;
         return lista2;
     }
+    return lista2;
 }
 
 int comparar (LDEC lista1, LDEC lista2) {
+    if (isEmpty(lista1) == 1 && isEmpty(lista2) == 1) {
+        return 1;
+    }
     if (lista1.qtd != lista2.qtd) {
         return 0;
     }
-    else {
-        ListNode* aux1 = lista1.inicio;
-        ListNode* aux2 = lista2.inicio;
-        int contador = 0;
-        do {
-            if (aux1->info->num == aux2->info->num && strcmp(aux1->info->texto, aux2->info->texto) == 0 ) {
-                contador++;
-            }
-            if (contador == lista1.qtd) {
-                return 1;
-            }
-            aux1 = aux1->prox;
-            aux2 = aux2->prox;
-        } while (aux1 != lista1.inicio);
-    }
+
+    ListNode* aux1 = lista1.inicio;
+    ListNode* aux2 = lista2.inicio;
+
+    do {
+        if (aux1->info->num != aux2->info->num || strcmp(aux1->info->texto, aux2->info->texto) == 1 ) {
+            return 0;
+        }
+        aux1 = aux1->prox;
+        aux2 = aux2->prox;
+    } while (aux1 != lista1.inicio);
+    return 1;
 }
 
 int main() {
@@ -229,13 +230,14 @@ int main() {
                 concatenar(&lista1, &lista2);
                 break;
 
-            case 5:
+            case 5: {
                 LDEC lista2 = dividir(&lista1);
                 printf("Lista 1: ");
                 listar(lista1);
                 printf("Lista 2: ");
                 listar(lista2);
                 break;
+            }
             
             case 6:
                 if (comparar(lista1, lista2) == 1) {
