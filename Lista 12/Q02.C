@@ -122,9 +122,9 @@ LDEC dividir (LDEC* lista1) {
         }
         lista2.inicio = aux->prox;
         lista2.fim = lista1->fim;
-        lista1->fim = aux;
         lista1->fim->prox = lista1->inicio;
         lista1->inicio->ant = lista1->fim;
+        lista1->fim = aux;
         lista2.fim->prox = lista2.inicio;
         lista2.inicio->ant = lista2.fim;
         lista2.qtd = lista1->qtd - metade;
@@ -207,13 +207,14 @@ int main() {
                 concatenar(&lista1, &lista2);
                 break;
 
-            case 5:
+            case 5: {
                 LDEC lista2 = dividir(&lista1);
                 printf("Lista 1: ");
                 listar(lista1);
                 printf("Lista 2: ");
                 listar(lista2);
                 break;
+            }
             
             case 6:
                 printf("Saindo do programa...\n");
